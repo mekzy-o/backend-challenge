@@ -1,8 +1,11 @@
 import express from 'express'
-import { fetchAllUsers } from '../../controllers/users.controller'
+import { createUser, signInUser } from '../../controllers/users.controller'
+import validate from '../../middlewares/users.validations.middlewares'
+import { checkEmail, checkUsername } from '../../middlewares/users.middlewares'
 
 const userRoutes = express.Router()
 
-userRoutes.get('/', fetchAllUsers)
+userRoutes.post('/signup', validate.signup, checkEmail, checkUsername, createUser)
+userRoutes.post('/login', validate.signin, signInUser)
 
 export default userRoutes

@@ -29,10 +29,12 @@ app.use(express.json())
 // routes
 app.use(router)
 
-app.get('*', (req: Request, res: Response) =>
-  res.status(200).send({
-    status: 'fail',
-    message: 'Route not found'
+app.use('*', (req: Request, res: Response) =>
+  res.status(404).send({
+    success: false,
+    error: true,
+    message: 'Route not found',
+    data: null
   })
 )
 

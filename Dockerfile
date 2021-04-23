@@ -1,7 +1,7 @@
 # Use the node official image as a parent image.
-FROM node:current-slim
+FROM node:latest
 
-LABEL Peace Oyedeji <oyedejipeacea@gmail.com>
+LABEL Emeka Ofe <emekaofe22@gmail.com>
 
 # Create work directory
 WORKDIR /
