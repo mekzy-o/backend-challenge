@@ -21,7 +21,6 @@
     "migrate:seed": "yarn db:rollback && yarn migrate && yarn seed",
     "docker:build": "docker build -t express-sequelize-typescript-boilerplate .",
     "docker:run": "docker run --rm -it -p 8080:8080 express-sequelize-typescript-boilerplate"
-
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -32,6 +31,8 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-validator": "^6.10.0",
+    "jsonwebtoken": "^8.5.1",
     "mocha": "^8.1.2",
     "morgan": "^1.10.0",
     "pg": "^8.3.2",
@@ -44,6 +45,7 @@
     "@types/chai": "^4.2.12",
     "@types/cors": "^2.8.7",
     "@types/express": "^4.17.7",
+    "@types/jsonwebtoken": "^8.5.1",
     "@types/mocha": "^8.0.3",
     "@types/morgan": "^1.9.1",
     "@types/node": "^14.6.0",

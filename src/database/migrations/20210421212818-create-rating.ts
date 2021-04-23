@@ -4,41 +4,39 @@ module.exports = {
   //@ts-ignore
   up: async (queryInterface, Sequelize) => {
     await queryInterface.sequelize.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";')
-    return queryInterface.createTable('users', {
+    return queryInterface.createTable('ratings', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.literal('uuid_generate_v4()')
       },
-      username: {
-        allowNull: {
-          args: false,
-          msg: 'Please enter a username'
-        },
-        type: Sequelize.STRING,
-        unique: {
-          args: true,
-          msg: 'Username already exist'
-        }
-      },
-      email: {
+      questionId: {
         allowNull: false,
-        type: Sequelize.STRING,
-        unique: true,
-        validate: {
-          isEmail: true
+        type: Sequelize.DataTypes.UUID,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        references: {
+          model: 'questions',
+          key: 'id'
         }
       },
-      password: {
+      userId: {
+        allowNull: false,
+        type: Sequelize.DataTypes.UUID,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        references: {
+          model: 'users',
+          key: 'id'
+        }
+      },
+      vote: {
         allowNull: {
           args: false,
-          msg: 'Please enter a password'
+          msg: 'Please upvote or downvote a question'
         },
-        type: Sequelize.STRING,
-        validate: {
-          len: [8, 72]
-        }
+        type: Sequelize.ENUM,
       },
       createdAt: {
         allowNull: false,
@@ -50,7 +48,8 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
       }
-    })},
+    })
+  },
   //@ts-ignore
-  down: queryInterface => queryInterface.dropTable('user')
+  down: queryInterface => queryInterface.dropTable('ratings')
 }
