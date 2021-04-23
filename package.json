@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "src/app.ts",
   "license": "MIT",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "ts-node src/app.ts",
     "start:dev": "nodemon --watch src --exec ts-node src/app.ts",
@@ -14,12 +17,13 @@
     "migration:generate": "./node_modules/.bin/sequelize migration:generate",
     "seed:generate": "./node_modules/.bin/sequelize seed:generate",
     "migrate": "sequelize db:migrate",
-    "undo:migration": "./node_modules/.bin/sequelize db:migrate:undo:all",
+    "undo:migration": "sequelize db:migrate:undo:all",
     "seed": "./node_modules/.bin/sequelize db:seed:all",
     "undo:seed": "./node_modules/.bin/sequelize db:seed:undo:all",
     "db:rollback": "npm run undo:migration && npm run undo:seed",
     "migrate:seed": "npm run db:rollback && npm run migrate && npm run seed",
-    "heroku-postbuild": "npm run migrate"
+    "heroku:db": "npm run undo:migration && npm run migrate",
+    "heroku-postbuild": "npm run heroku:db"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -37,6 +41,8 @@
     "pg": "^8.3.2",
     "sequelize": "4",
     "sequelize-cli": "^6.2.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4",
     "winston": "^3.3.3"
   },
   "devDependencies": {
@@ -57,8 +63,6 @@
     "eslint-plugin-prettier": "^3.1.4",
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
-    "rimraf": "^3.0.2",
-    "ts-node": "^9.0.0",
-    "typescript": "^4.0.2"
+    "rimraf": "^3.0.2"
   }
 }

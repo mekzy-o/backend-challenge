@@ -36,7 +36,7 @@ module.exports = {
           args: false,
           msg: 'Please upvote or downvote a question'
         },
-        type: Sequelize.ENUM,
+        type: Sequelize.ENUM('upvote', 'downvote'),
       },
       createdAt: {
         allowNull: false,

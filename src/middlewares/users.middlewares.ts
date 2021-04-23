@@ -8,6 +8,9 @@ config()
 
 export interface IGetUserAuthInfoRequest extends Request {
   user: any
+  headers: any
+  body: any
+  params: any
 }
 
 /**
