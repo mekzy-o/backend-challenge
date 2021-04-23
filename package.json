@@ -1,5 +1,5 @@
 {
-  "name": "express-sequelize-typescript-boilerplate",
+  "name": "stackoverflow-clone",
   "version": "1.0.0",
   "main": "src/app.ts",
   "license": "MIT",
@@ -13,14 +13,13 @@
     "model:generate": "./node_modules/.bin/sequelize model:generate",
     "migration:generate": "./node_modules/.bin/sequelize migration:generate",
     "seed:generate": "./node_modules/.bin/sequelize seed:generate",
-    "migrate": "./node_modules/.bin/sequelize db:migrate",
+    "migrate": "sequelize db:migrate",
     "undo:migration": "./node_modules/.bin/sequelize db:migrate:undo:all",
     "seed": "./node_modules/.bin/sequelize db:seed:all",
     "undo:seed": "./node_modules/.bin/sequelize db:seed:undo:all",
-    "db:rollback": "yarn undo:migration && yarn undo:seed",
-    "migrate:seed": "yarn db:rollback && yarn migrate && yarn seed",
-    "docker:build": "docker build -t express-sequelize-typescript-boilerplate .",
-    "docker:run": "docker run --rm -it -p 8080:8080 express-sequelize-typescript-boilerplate"
+    "db:rollback": "npm run undo:migration && npm run undo:seed",
+    "migrate:seed": "npm run db:rollback && npm run migrate && npm run seed",
+    "heroku-postbuild": "npm run migrate"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
